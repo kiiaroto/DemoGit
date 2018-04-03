@@ -219,6 +219,7 @@ CREATE TABLE projet (
     REFERENCES session_formation (id_session_formation)
   )ENGINE = InnoDB;
 
-CREATE USER IF NOT EXISTS 'agriotes2018user' IDENTIFIED BY 'agriotes2018pwd';
-GRANT ALL ON * TO 'agriotes2018user';
-GRANT EXECUTE ON * TO 'agriotes2018user';
+CREATE USER IF NOT EXISTS agriotes2018user IDENTIFIED BY 'agriotes2018pwd';
+GRANT ALL ON * TO agriotes2018user;
+GRANT SELECT, EXECUTE ON * TO agriotes2018user;
+GRANT SELECT ON mysql.proc TO  agriotes2018user;
