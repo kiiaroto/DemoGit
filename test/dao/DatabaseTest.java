@@ -6,6 +6,8 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -25,4 +27,9 @@ public class DatabaseTest {
       assertNotNull(result);
     }
     
+    @Test
+    public void testReset() throws SQLException {
+        System.out.println("reset");
+        Database.reset(LocalDateTime.now());
+    }
 }

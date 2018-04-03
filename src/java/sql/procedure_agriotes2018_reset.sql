@@ -68,7 +68,7 @@ BEGIN
     (1, 'non traitée'),
     (2, 'refusé'),
     (3, 'reçu'),
-    (4, 'liste d\'attente'),
+    (4, 'liste d''attente'),
     (5, 'accepté'),
     (6, 'inscrit'),
     (7, 'desisté');
@@ -123,8 +123,8 @@ BEGIN
     (12, 3, 23, 1, date_effet + INTERVAL 3 MONTH + INTERVAL 1 DAY, 1);
     
     INSERT INTO evaluation(id_evaluation, id_module, id_formateur, date_debut, nb_minutes, titre) VALUES
-    (1, 1, 23, date_effet - INTERVAL 1 YEAR - INTERVAL 4 MONTH, 120, 'Evaluation final de mathématique'),
-    (2, 2, 24, date_effet - INTERVAL 1 YEAR - INTERVAL 4 MONTH, 240, 'Evaluation mise en place d\'un serveur LAMP'),
+    (1, 1, 23, date_effet - INTERVAL 1 YEAR - INTERVAL 4 MONTH, 120, 'Evaluation finale de mathématique'),
+    (2, 2, 24, date_effet - INTERVAL 1 YEAR - INTERVAL 4 MONTH, 240, 'Evaluation mise en place d''un serveur LAMP'),
     (3, 2, 24, date_effet, 60, 'Evaluation réseau 2'),
     (4, 2, 24, date_effet + INTERVAL 4 MONTH, 60, 'Evaluation réseau 3'),
     (5, 1, 23, date_effet, 60, 'Math 2'),
@@ -215,24 +215,24 @@ BEGIN
     (16, 3, 11, null);
     
     INSERT INTO projet(id_projet, id_formateur, id_session_formation, titre) VALUES
-    (1, 23, 1, 'Maintient d\'un site web'),
+    (1, 23, 1, 'Maintient d''un site web'),
     (2, 24, 1, 'Calcule de matrice');
     
     INSERT INTO echange(id_echange, id_personne, instant, texte) VALUES
-    (1, 2, date_effet - INTERVAL 2 YEAR + INTERVAL 5 MONTH, 'Demande d\'information concernant la formation'),
-    (2, 2, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH, 'Demande d\'inscription'),
-    (3, 2, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH, 'Confirmation de l\'invitation a la journée d\information'),
+    (1, 2, date_effet - INTERVAL 2 YEAR + INTERVAL 5 MONTH, 'Demande d''information concernant la formation'),
+    (2, 2, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH, 'Demande d''inscription'),
+    (3, 2, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH, 'Confirmation de l''invitation a la journée d\information'),
     (4, 22, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH + INTERVAL 1 DAY, 'Contact 1'),
     (5, 22, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH + INTERVAL 3 DAY, 'Contact 2'),
     (6, 22, date_effet - INTERVAL 2 YEAR + INTERVAL 7 MONTH + INTERVAL 5 DAY, 'Contact 3'),
     (7, 22, date_effet - INTERVAL 2 YEAR + INTERVAL 8 MONTH, 'Contact 4'),
     (8, 22, date_effet - INTERVAL 2 YEAR + INTERVAL 8 MONTH + INTERVAL 1 DAY, 'Contact 5'),
-    (9, 2, date_effet - INTERVAL 2 DAY, 'Demande d\'information'),
-    (10, 2, date_effet, 'Demande d\'annulation d\'inscription');
+    (9, 2, date_effet - INTERVAL 2 DAY, 'Demande d''information'),
+    (10, 2, date_effet, 'Demande d''annulation d''inscription');
     
     INSERT INTO evenement(id_evenement, nom, date_effet) VALUES
     (1, 'Remise des Diplome', date_effet - INTERVAL 1 YEAR),
-    (2, 'Réunion d\'inscription', date_effet - INTERVAL 1 MONTH);
+    (2, 'Réunion d''inscription', date_effet - INTERVAL 1 MONTH);
     
     INSERT INTO invitation(id_personne, id_evenement) VALUES
     (1, 1),
@@ -241,6 +241,3 @@ BEGIN
     (22, 2);
 
 END$$
-
-DELIMITER ;
-
