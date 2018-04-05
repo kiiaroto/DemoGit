@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Personne;
-import tools.RandomMdp;
+import tools.PasswordGenerator;
 
 /**
  *
@@ -110,9 +110,9 @@ public class InscrireServlet extends HttpServlet {
                 Connection con = Database.getConnection();
 
                 PersonneDao pdao = new PersonneDao();
-                RandomMdp randmdp = new RandomMdp();
+                PasswordGenerator randmdp = new PasswordGenerator();
 
-                String mdp = randmdp.GenMDP();
+                String mdp = randmdp.getRandomPassword();
 
                 Personne pers = new Personne(0, nom, prenom, mail, tel, adresse, codepostal, ville, mdp);
 
