@@ -8,8 +8,9 @@ CREATE TABLE personne (
   nom VARCHAR(45) NOT NULL,
   prenom VARCHAR(45) NOT NULL,
   mail VARCHAR(45) NOT NULL,
+  tel VARCHAR(10) NOT NULL,
   adresse VARCHAR(45) NULL,
-  code_postal INT NULL,
+  code_postal VARCHAR(5) NULL,
   ville VARCHAR(45) NULL,
   mot_de_passe VARCHAR(45) NOT NULL,
   PRIMARY KEY (id_personne),
@@ -218,6 +219,7 @@ CREATE TABLE projet (
     REFERENCES session_formation (id_session_formation)
   )ENGINE = InnoDB;
 
-CREATE USER IF NOT EXISTS 'agriotes2018user' IDENTIFIED BY 'agriotes2018pwd';
-GRANT ALL ON * TO 'agriotes2018user';
-GRANT EXECUTE ON * TO 'agriotes2018user';
+CREATE USER IF NOT EXISTS agriotes2018user IDENTIFIED BY 'agriotes2018pwd';
+GRANT ALL ON * TO agriotes2018user;
+GRANT SELECT, EXECUTE ON * TO agriotes2018user;
+GRANT SELECT ON mysql.proc TO  agriotes2018user;
