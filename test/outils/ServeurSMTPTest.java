@@ -8,8 +8,8 @@ package outils;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import junit.framework.TestCase;
-import outils.ServeurSMTP;
-import outils.ServeurSMTP;
+import tools.ServeurSMTP;
+import tools.ServeurSMTP;
 
 /**
  *
