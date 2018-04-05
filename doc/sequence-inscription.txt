@@ -1,1 +1,19 @@
+@startuml
 
+actor Utilisateur
+participant Vue
+participant Controleur
+participant Modele
+participant SMTP
+
+Utilisateur -> Controleur: GET /inscrire
+Controleur --> Vue: inscription.jsp
+Vue --> Utilisateur
+Utilisateur -> Controleur: POST /inscrire
+Controleur -> Controleur: Vérification des champs saisie
+Controleur -> Modele: new Personne, DAO Personne insert
+Controleur -> SMTP: envoi de mail
+Controleur --> Vue: message.jsp
+Vue --> Utilisateur
+
+@enduml
