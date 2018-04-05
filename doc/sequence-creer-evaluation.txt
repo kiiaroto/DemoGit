@@ -1,0 +1,16 @@
+@startuml
+participant Navigateur
+participant Vue
+participant Controleur
+participant Modèle
+
+Navigateur -> Controleur: GET /creerEvaluation
+Controleur -> Controleur: verifie que l'utilisateur est\nun formateur ou l'administration
+Controleur -> Vue: creerEvaluation.jsp
+Vue -> Navigateur: formulaire pour créer l'évaluation
+Navigateur -> Controleur: POST /creerEvaluation\navec idModule, idSessionFormation, dateHeure, duree
+Controleur -> Modèle: new Evaluation(...);\nEvaluationDao dao = new ...\ndao.insert(eval);
+Controleur -> Controleur: Vérifie que pas d'erreur (doublon)
+Controleur -> Navigateur: response.redirect("/mesEvaluations")
+Navigateur -> Controleur: /mesEvaluations
+@enduml
