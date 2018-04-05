@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Personne;
 import tools.PasswordGenerator;
+import tools.ServeurSMTP;
 
 /**
  *
@@ -29,9 +31,9 @@ import tools.PasswordGenerator;
  */
 @WebServlet(name = "InscrireServlet", urlPatterns = {"/inscrire"})
 public class InscrireServlet extends HttpServlet {
-
+    Personne pers=new Personne() ;
     private final String VUE_FORM = "/WEB-INF/inscription.jsp";
-    private final String VUE_MESSAGE = "/WEB_INF/message.jsp";
+    private final String VUE_MESSAGE = "/WEB-INF/message.jsp";
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -91,7 +93,7 @@ public class InscrireServlet extends HttpServlet {
             champsvalides = false;
             request.setAttribute("telephone_message", "Veuillez entrer votre téléphone.");
         }
-        if (adresse != null || !adresse.matches("^ *$")) {
+        if (adresse == null || adresse.matches("^ *$")) {
             champsvalides = false;
             request.setAttribute("adresse_message", "Veuillez entrer votre adresse.");
         }
@@ -107,25 +109,32 @@ public class InscrireServlet extends HttpServlet {
         
         if (champsvalides) {
             try {
-                Connection con = Database.getConnection();
-
-                PersonneDao pdao = new PersonneDao();
-                PasswordGenerator randmdp = new PasswordGenerator();
-
-                String mdp = randmdp.getRandomPassword();
-
-                Personne pers = new Personne(0, nom, prenom, mail, tel, adresse, codepostal, ville, mdp);
-
-                pdao.insert(pers);
-                request.setAttribute("message", "Vous êtes inscrit ");
-            } catch (SQLException ex) {
-                if (ex.getErrorCode() == Database.DOUBLON) {
-                    request.setAttribute("message", "Cette adresse email existe déjà");
-                    vue = VUE_FORM;
-                } else {
-                    Logger.getLogger(InscrireServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    request.setAttribute("message", "Problème de bases de données à " + (new Date()));
+                try {
+                    Connection con = Database.getConnection();
+                    
+                    PersonneDao pdao = new PersonneDao();
+                    PasswordGenerator randmdp = new PasswordGenerator();
+                    
+                    String mdp = randmdp.getRandomPassword();
+                    
+                    pers = new Personne(0, nom, prenom, mail, tel, adresse, codepostal, ville, mdp);
+                    
+                    pdao.insert(pers);
+                    request.setAttribute("message", "Vous êtes inscrit ");
+                } catch (SQLException ex) {
+                    if (ex.getErrorCode() == Database.DOUBLON) {
+                        request.setAttribute("message", "Cette adresse email existe déjà");
+                        vue = VUE_FORM;
+                    } else {
+                        Logger.getLogger(InscrireServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        request.setAttribute("message", "Problème de bases de données à " + (new Date()));
+                    }
                 }
+                ServeurSMTP s = new ServeurSMTP();
+                s.NewEmail(pers.getMail(), pers.getMotDePasse());
+            } catch (MessagingException ex) {
+                Logger.getLogger(InscrireServlet.class.getName()).log(Level.SEVERE, null, ex);
+
             }
         } else {
             HttpSession maSession = request.getSession();

@@ -56,5 +56,22 @@ public class ServeurSMTP {
         result.setSubject(subject);
         return result;
     }
+    public void NewEmail(String mail, String mdp) throws MessagingException {
+    System.out.println("newEmail");
+    try {
+      String from = "btssiomassy@gmail.com";
+      String to = mail;
+      String subject = "Votre mot de passe ";
+      MimeMessage result = ServeurSMTP.newEmail(from, to, subject);
+      String body = "Vous trouverez ci-joint votre mot de passe de connexion :  "+mdp;
+      MimeMessage maila = ServeurSMTP.newEmail(from, to, subject);
+      maila.setContent(body, "text/plain; charset=utf-8");
+      javax.mail.Transport.send(maila);
+    }
+    catch (MessagingException exc ) {
+      exc.printStackTrace();
+      throw exc;
+    }
+  }
 
 }
