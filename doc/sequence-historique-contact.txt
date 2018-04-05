@@ -1,0 +1,12 @@
+@startuml
+participant Navigateur
+participant Vue
+participant Controleur
+participant Modèle
+
+Navigateur -> Controleur: GET /contact?id=1234
+Controleur -> Controleur: verifie que l'utilisateur est l'administration
+Controleur -> Modèle: ContactDao dao = new ContactDao();\nList<Evenement> evenements = dao.getById(1234);
+Controleur -> Vue: contact.jsp
+Vue -> Navigateur -> coordonnées du contact\n+ historique des évènements\n+ boutons pour actions
+@enduml
