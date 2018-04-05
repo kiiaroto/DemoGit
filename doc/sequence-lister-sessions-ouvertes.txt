@@ -1,0 +1,12 @@
+@startuml
+participant Navigateur
+participant Vue
+participant Controleur
+participant Modèle
+Navigateur -> Controleur: /sessionsOuvertes
+Controleur -> Modèle: SessionDao dao = ...;\ndao.getSessionsOuvertes()\nSessionFormation
+Modèle -> Controleur: List
+Controleur -> Vue: sessions.jsp
+Vue -> Navigateur: tableau des sessions
+
+@enduml

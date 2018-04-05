@@ -1,0 +1,17 @@
+@startuml
+[*] --> 1_non_traitée
+1_non_traitée --> 2_refusée
+1_non_traitée --> 3_reçue
+3_reçue --> 2_refusée
+3_reçue --> 5_acceptée
+3_reçue --> 4_liste_attente
+4_liste_attente --> 5_acceptée
+5_acceptée --> 6_inscrit
+6_inscrit --> 7_désisté
+5_acceptée --> 7_désisté
+2_refusée --> [*]
+6_inscrit --> [*]
+7_désisté --> [*]
+@enduml
+
+

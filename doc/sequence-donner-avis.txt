@@ -1,0 +1,15 @@
+@startuml
+participant Navigateur
+participant Vue
+participant Controleur
+participant Modèle
+
+Navigateur -> Controleur: GET /donnerAvis
+Controleur -> Vue: donnerAvis.jsp
+Vue -> Navigateur: formulaire
+Navigateur -> Controleur: POST /donnerAvis \navec avisFonctionnalite, avisErgonomie, avisEsthetique
+Controleur -> Modèle: AvisDao dao = new AvisDao();\n dao.insert(avis)
+Modèle -> Controleur:
+Controleur -> Navigateur: redirection
+Navigateur -> Controleur: GET avis\n(tous les avis dans l'ordre du plus récent au plus ancien, \navec résumé et pagination)
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+left to right direction 
+
+Visiteur <|-- Candidat
+Candidat <|-- Stagiaire
+Membre <|-- Stagiaire
+Membre <|-- Formateur
+Membre <|-- Admin
+
+Visiteur --> (Lister les sessions ouvertes à candidature)
+Visiteur --> (Contacter)
+Visiteur --> (S'inscrire)
+Visiteur --> (Lister les formateurs)
+Visiteur --> (Donner son avis)
+Visiteur --> (Consulter les avis)
+
+Candidat --> (Postuler)
+Candidat --> (Accéder à son espace personnel)
+
+Membre --> (Changer son mot de passe)
+Membre --> (Voir les trombinoscopes)
+Membre --> (Accéder à son espace personnel)
+Membre --> (Voir et modifier ses informations personnelles)
+
+Stagiaire --> (Consulter ses notes et ses évaluations\n en cours et à venir)
+Stagiaire --> (Voir son planning)
+Stagiaire --> (Créer une équipe)
+
+Admin --> (Traiter les candidatures)
+Admin --> (Gérer les contacts)
+Admin --> (Inscrire un stagiaire)
+Admin --> (Voir le planning d'une session ou d'un formateur)
+Admin --> (Voir un stagiaire\nfiche, notes, présences)
+Admin --> (Produire feuilles d'émargement pour un événement :\n cours, réunion d'information, examens)
+Admin --> (Saisir les présences ou les absences)
+Admin --> (Gérer les formateurs)
+Admin --> (Ajouter une formation)
+Admin --> (Ajouter une session de formation)
+
+Formateur --> (Lister ses sessions de formation)
+Formateur --> (Voir son planning)
+Formateur --> (Saisir les notes des stagiaires)
+Formateur --> (Gérer ses évaluations)
+Formateur --> (Créer projet multi-équipes)
+@enduml

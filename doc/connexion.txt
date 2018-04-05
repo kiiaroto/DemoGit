@@ -1,0 +1,18 @@
+@startuml
+
+actor Utilisateur
+participant Vue
+participant Controleur
+participant Modele
+
+Utilisateur -> Controleur: GET /
+Controleur --> Vue: login.jsp
+Vue --> Utilisateur
+Utilisateur -> Controleur: POST /connexion
+Controleur -> Modele: LoginHome dao.getByLoginPassword()
+Modele --> Controleur: Si ok
+Controleur -> Controleur: Ajouté en Session
+Controleur --> Vue: index.jsp
+Vue --> Utilisateur
+
+@enduml
